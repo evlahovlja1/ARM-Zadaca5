@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "ebs_encryption_kms_key_policy" {
       type = "AWS"
       identifiers = [
         "${data.aws_caller_identity.current.arn}",
-        "arn:aws:iam::${local.account_id}:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling_zadaca5"
+        "arn:aws:iam::${local.account_id}:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
       ]
     }
     actions = [
@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "ebs_encryption_kms_key_policy" {
       type = "AWS"
       identifiers = [
         "${data.aws_caller_identity.current.arn}",
-        "arn:aws:iam::${local.account_id}:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling_zadaca5"
+        "arn:aws:iam::${local.account_id}:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
       ]
     }
     actions   = ["kms:CreateGrant"]

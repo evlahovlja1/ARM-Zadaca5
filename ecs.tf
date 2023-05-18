@@ -22,13 +22,13 @@ resource "aws_ecs_task_definition" "frontend_task" {
           },
         ]
         essential   = true
-        image       = "kibrovic/frontend-task"
+        image       = "evlahovlja1/siprojekat:1684439818"
         memory      = 512
         mountPoints = []
         name        = "frontend-task"
         portMappings = [
           {
-            containerPort = 8080
+            containerPort = 80
             hostPort      = 80
             protocol      = "tcp"
           },
@@ -86,7 +86,7 @@ resource "aws_ecs_task_definition" "database_task" {
           timeout  = 20
         }
         image       = "mysql"
-        memory      = 512
+        memory      = 256
         mountPoints = []
         name        = "database"
         portMappings = [

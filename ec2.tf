@@ -22,7 +22,7 @@ data "aws_ami" "ecs_optimized_amazon_linux_ami" {
 resource "aws_launch_template" "arm_launch_template" {
   name_prefix            = "arm_launch_template"
   image_id               = data.aws_ami.ecs_optimized_amazon_linux_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   key_name               = aws_key_pair.arm_ec2_access_key.key_name
   vpc_security_group_ids = [aws_security_group.arm_security_group.id]
   user_data = base64encode(templatefile("./templates/user_data.tpl", {
@@ -62,7 +62,7 @@ resource "aws_autoscaling_group" "arm_autoscaling_group" {
   max_size                  = 2
   min_size                  = 1
   vpc_zone_identifier       = [aws_subnet.arm_subnet_public.id]
-  wait_for_capacity_timeout = "2m"
+  wait_for_capacity_timeout = "5m"
 
   launch_template {
     id      = aws_launch_template.arm_launch_template.id
@@ -83,7 +83,7 @@ resource "aws_autoscaling_group" "arm_autoscaling_group" {
 resource "aws_instance" "arm_server_private" {
   ami                    = data.aws_ami.ecs_optimized_amazon_linux_ami.id
   iam_instance_profile   = data.aws_iam_instance_profile.lab_instance_profile.name
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   vpc_security_group_ids = [resource.aws_security_group.arm_security_group.id]
   subnet_id              = aws_subnet.arm_subnet_private.id
   user_data_base64 = base64encode(templatefile("./templates/user_data.tpl", {
