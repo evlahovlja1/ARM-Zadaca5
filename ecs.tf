@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "frontend_task" {
           },
         ]
         essential   = true
-        image       = "evlahovlja1/siprojekat:1684439818"
+        image       = "evlahovlja1/siprojekat:latest"
         memory      = 512
         mountPoints = []
         name        = "frontend-task"
